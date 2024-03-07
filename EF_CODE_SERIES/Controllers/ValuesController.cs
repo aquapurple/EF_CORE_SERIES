@@ -19,16 +19,27 @@ namespace EF_CODE_SERIES.Controllers
             _context = context;
             
         }
-    //    [HttpGet]
-    //    public IActionResult Get()
-    //    {
-    //        var entity = _context.Model
-    //.FindEntityType(typeof(Student).FullName);
-    //        var tableName = entity.GetTableName();
-    //        var schemaName = entity.GetSchema();
-    //        var key = entity.FindPrimaryKey();
-    //        var properties = entity.GetProperties();
+     //      [HttpGet]
+     //   public IActionResult Get()
+     //   {
+     //       var students = _context.student
+     //         .Where(s => s.Age > 25)
+     //         .ToList();
             
-    //    }
+     //return Ok(students);
+
+     //      }
+
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            var students = _context.student
+              .AsNoTracking()
+              .Where(s => s.Age > 25)
+              .ToList();
+
+            return Ok(students);
+        }
     }
 }
