@@ -68,5 +68,22 @@ namespace EF_CODE_SERIES.Controllers
 
             return Ok(students);
         }
+
+
+        [HttpGet]
+        [Route("api/Retrieve_SELECT_option")]
+        public IActionResult Retrieve_SELECT_option()
+        {
+            var students = _context.student
+    .Select(s => new
+    {
+        s.Name,
+        s.Age,
+        NumberOfEvaluations = s.Evaluations.Count
+    })
+    .ToList();
+
+            return Ok(students);
+        }
     }
 }
