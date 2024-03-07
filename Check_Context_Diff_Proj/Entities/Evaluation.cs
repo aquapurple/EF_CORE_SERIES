@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities;
 
 namespace Check_Context_Diff_Proj.Entities
 {
@@ -16,6 +17,7 @@ namespace Check_Context_Diff_Proj.Entities
         public int Grade { get; set; }
         public string AdditionalExplanation { get; set; }
 
-      
+        ////one-2Many Relationship btw Student and Evaluation
+        public Student Student { get; set; }
     }
 }
