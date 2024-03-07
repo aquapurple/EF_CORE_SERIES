@@ -54,5 +54,19 @@ namespace EF_CODE_SERIES.Controllers
 
             return Ok(students);
         }
+
+
+        [HttpGet]
+        [Route("api/Stud_WithEvaluationThenInclude")]
+        public IActionResult Stud_WithEvaluationThenInclude()
+        {
+            var students = _context.student
+             .Include(e => e.Evaluations)
+             .Include(e=>e.StudentDetails)
+             .Include(f=>f.StudentSubjects)
+             .FirstOrDefault();
+
+            return Ok(students);
+        }
     }
 }
