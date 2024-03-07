@@ -16,7 +16,6 @@ namespace Check_Context_Diff_Proj.Entities
         public int Grade { get; set; }
         public string AdditionalExplanation { get; set; }
 
-        //one-2Many Relationship btw Student and Evaluation
-        public ICollection<Evaluation> Evaluations { get; set; }
+      
     }
 }
