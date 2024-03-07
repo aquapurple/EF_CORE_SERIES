@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entities;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Check_Context_Diff_Proj.Entities
 {
@@ -18,6 +19,9 @@ namespace Check_Context_Diff_Proj.Entities
         public string AdditionalExplanation { get; set; }
 
         ////one-2Many Relationship btw Student and Evaluation
+        //Data Annotations Approach
+        [ForeignKey(nameof(Student))]
+        public Guid StudentId { get; set; }
         public Student Student { get; set; }
     }
 }

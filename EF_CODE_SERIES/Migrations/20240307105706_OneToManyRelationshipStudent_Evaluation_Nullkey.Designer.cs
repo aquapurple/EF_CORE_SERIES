@@ -4,6 +4,7 @@ using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EF_CODE_SERIES.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20240307105706_OneToManyRelationshipStudent_Evaluation_Nullkey")]
+    partial class OneToManyRelationshipStudent_Evaluation_Nullkey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,19 +97,19 @@ namespace EF_CODE_SERIES.Migrations
                     b.HasData(
                         new
                         {
-                            StudentId = new Guid("84ddd250-835e-4136-b04a-260d6583077c"),
+                            StudentId = new Guid("433f126b-89f9-41c2-91fd-4848b5c14e96"),
                             Age = 1,
                             Name = "Adrian"
                         },
                         new
                         {
-                            StudentId = new Guid("25c76ef1-bf0b-4e7d-9ab9-5136c3653651"),
+                            StudentId = new Guid("e4c18021-bd7d-4c05-bf67-90ac6972dc84"),
                             Age = 40,
                             Name = "Anish"
                         },
                         new
                         {
-                            StudentId = new Guid("991e87ea-c22f-45be-a766-60541fb32ae0"),
+                            StudentId = new Guid("28630baf-cf7c-44fe-880f-638bed7700ff"),
                             Age = 34,
                             Name = "Anu"
                         });
