@@ -85,5 +85,28 @@ namespace EF_CODE_SERIES.Controllers
 
             return Ok(students);
         }
+
+
+        [HttpGet]
+        [Route("api/FROMSQLRAW_Method")]
+        public IActionResult FROMSQLRAW_Method()
+        {
+            var students = _context.student
+     .FromSqlRaw(@"SELECT * FROM Student WHERE Name = {0}", "Adrian")
+     .FirstOrDefault();
+
+            return Ok(students);
+        }
+
+        [HttpGet]
+        [Route("api/FROMSQLRAW_Method_StorPROC")]
+        public IActionResult FROMSQLRAW_Method_StorPROC()
+        {
+            var students = _context.student
+       .FromSqlRaw("EXECUTE dbo.sp_johnzFirst")
+    .ToList();
+
+            return Ok(students);
+        }
     }
 }
