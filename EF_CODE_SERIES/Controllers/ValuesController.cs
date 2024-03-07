@@ -32,12 +32,25 @@ namespace EF_CODE_SERIES.Controllers
 
 
         [HttpGet]
-        public IActionResult Get()
+        [Route("api/Retrieve")]
+        public IActionResult Retrive()
         {
             var students = _context.student
               .AsNoTracking()
               .Where(s => s.Age > 25)
               .ToList();
+
+            return Ok(students);
+        }
+
+
+        [HttpGet]
+        [Route("api/Stud_WithEvaluation")]
+        public IActionResult Stud_WithEvaluation()
+        {
+            var students = _context.student
+             .Include(e => e.Evaluations)
+             .FirstOrDefault();
 
             return Ok(students);
         }
