@@ -14,10 +14,10 @@ namespace Entities
         public string Name { get; set; }
         public int? Age { get; set; }
         //relationship between the Student and the StudentDetails
-        public StudentDetails StudentDetails { get; set; }
+        public StudentDetails ?StudentDetails { get; set; }
         //one-2Many Relationship btw Student and Evaluation
-        public ICollection<Evaluation> Evaluations { get; set; }
+        public ICollection<Evaluation>? Evaluations { get; set; }
 
-        public ICollection<StudentSubject> StudentSubjects { get; set; }
+        public ICollection<StudentSubject> ?StudentSubjects { get; set; }
     }
 }
