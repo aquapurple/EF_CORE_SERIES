@@ -51,6 +51,7 @@ namespace Entities
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration( new StudentConfiguration() );
+            modelBuilder.ApplyConfiguration(new StudentSubjectConfiguration());
         }
 
 

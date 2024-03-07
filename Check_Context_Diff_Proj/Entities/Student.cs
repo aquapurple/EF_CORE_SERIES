@@ -17,5 +17,7 @@ namespace Entities
         public StudentDetails StudentDetails { get; set; }
         //one-2Many Relationship btw Student and Evaluation
         public ICollection<Evaluation> Evaluations { get; set; }
+
+        public ICollection<StudentSubject> StudentSubjects { get; set; }
     }
 }
