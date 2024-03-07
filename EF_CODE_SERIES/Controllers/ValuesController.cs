@@ -108,5 +108,30 @@ namespace EF_CODE_SERIES.Controllers
 
             return Ok(students);
         }
+
+
+        [HttpGet]
+        [Route("api/FROMSQLRAW_Method_SINCLUDE")]
+        public IActionResult FROMSQLRAW_Method_SINCLUDE()
+        {
+            var students = _context.student
+     .FromSqlRaw("SELECT * FROM Student WHERE Name = {0}", "Adrian")
+     .Include(e => e.Evaluations)
+     .FirstOrDefault();
+
+            return Ok(students);
+        }
+
+        [HttpGet]
+        [Route("api/FROMSQLRAW_Method_UPDATE")]
+        public IActionResult FROMSQLRAW_Method_UPDATE()
+        {
+            var rowsAffected = _context.Database
+      .ExecuteSqlRaw(
+          @"UPDATE Student
+          SET Age = {0} 
+          WHERE Name = {1}", 29, "Anu");
+            return Ok(new { RowsAffected = rowsAffected });
+        }
     }
 }
