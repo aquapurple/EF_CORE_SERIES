@@ -37,7 +37,7 @@ namespace EF_CODE_SERIES.Controllers
         {
             var students = _context.student
               .AsNoTracking()
-              .Where(s => s.Age > 25)
+              .Where(s => s.Age > 10)
               .ToList();
 
             return Ok(students);
