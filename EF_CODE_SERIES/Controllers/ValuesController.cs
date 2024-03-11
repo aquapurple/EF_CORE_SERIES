@@ -37,6 +37,7 @@ namespace EF_CODE_SERIES.Controllers
         {
             var students = _context.student
               .AsNoTracking()
+              .Include(x=>x.StudentDetails)
               .Where(s => s.Age > 10)
               .ToList();
 

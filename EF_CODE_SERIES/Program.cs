@@ -1,3 +1,4 @@
+using EF_CODE_SERIES.Interfaces;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -7,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationContext>(opts =>
         opts.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection1"), opts => opts.MigrationsAssembly("EF_CODE_SERIES")));
-
+builder.Services.AddScoped<IStudent,StudentIMPL>();
 
 builder.Services.AddControllers().AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling =
         Newtonsoft.Json.ReferenceLoopHandling.Ignore);
