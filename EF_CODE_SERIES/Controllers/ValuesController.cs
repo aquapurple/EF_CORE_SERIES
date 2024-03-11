@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using Entities;
+using System.Diagnostics;
 
 namespace EF_CODE_SERIES.Controllers
 {
@@ -13,11 +14,14 @@ namespace EF_CODE_SERIES.Controllers
     public class ValuesController : ControllerBase
     {
         public readonly  ApplicationContext _context;
-        public ValuesController(ApplicationContext context)
+        private readonly ILogger _logger;
+        public ValuesController(ApplicationContext context, ILogger<ValuesController> logger)
 
         {
             _context = context;
-            
+            _logger = logger;
+
+
         }
      //      [HttpGet]
      //   public IActionResult Get()
@@ -43,6 +47,32 @@ namespace EF_CODE_SERIES.Controllers
 
             return Ok(students);
         }
+
+
+        [HttpGet]
+        [Route("api/RetrieveSelectedField")]
+        public IActionResult RetrieveSelectedField()
+        {
+
+            var stopwath=Stopwatch.StartNew();
+            stopwath.Start();
+            Stopwatch stp = new Stopwatch();
+
+            var students = (_context.student
+              .AsNoTracking()
+              .Include(x => x.StudentDetails)
+              .Where(s => s.Age > 10)
+              .ToList()).Select(c => new { c.Name,c.Age });
+            stopwath.Stop();
+
+            var message = $"Processesd in: {stopwath.Elapsed}";
+            _logger.LogInformation(message);
+
+
+            return Ok(students);
+        }
+
+
 
 
         [HttpGet]
