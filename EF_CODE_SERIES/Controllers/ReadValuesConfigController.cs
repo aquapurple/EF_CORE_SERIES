@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Check_Context_Diff_Proj.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +25,17 @@ private readonly IConfiguration _configuration;
             var names = _configuration.GetValue<string>("Myvalues:Name");
 
             return students.ToString() + names.ToString();
+        }
+
+        [HttpGet]
+        [Route("api/ReadValuesGroupAppSett")]
+        public string ReadValuesGroupAppSett()
+        {
+            var vals = _configuration.GetSection("Myvalues").Get<Myvalues>();
+            var mob = vals.mobile;
+
+
+            return mob.Number1;
         }
     }
 }
