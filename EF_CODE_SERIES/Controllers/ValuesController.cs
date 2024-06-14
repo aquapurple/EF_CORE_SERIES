@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 using Entities;
 using System.Diagnostics;
+using System;
+using EF_CODE_SERIES.Interfaces;
 
 namespace EF_CODE_SERIES.Controllers
 {
@@ -41,9 +43,14 @@ namespace EF_CODE_SERIES.Controllers
         {
             var students = _context.student
               .AsNoTracking()
-              .Include(x=>x.StudentDetails)
+              .Include(x => x.StudentDetails)
               .Where(s => s.Age > 10)
-              .ToList();
+            .ToList();
+
+            //var students = _context.student
+            //    .Include(a => a.StudentDetails)
+            //    .AsSplitQuery()
+            //    .ToList();
 
             return Ok(students);
         }
@@ -163,6 +170,43 @@ namespace EF_CODE_SERIES.Controllers
           SET Age = {0} 
           WHERE Name = {1}", 29, "Anu");
             return Ok(new { RowsAffected = rowsAffected });
+        }
+
+
+        [HttpGet]
+        [Route("api/GroupBy")]
+        public IActionResult GroupBy()
+        {
+            var grouped_teachers = _context.student
+                  .GroupBy(t => new { t.Age })
+                  .Select(g => new
+                  {
+                      Age = g.Key.Age,
+                      count = g.Count(), //number of students in the group
+                      names = string.Join(", ", g.Select(t => t.Name)) // students names
+                  });
+            return Ok(grouped_teachers);
+
+            //foreach (var group in grouped_teachers)
+            //{
+            //    Console.WriteLine($"Subject: {group.subject}, Age: {group.age}, Count: {group.count}, Names: {group.names}");
+            //}
+        }
+
+
+        [HttpGet]
+        [Route("api/GroupByMatch")]
+        public IActionResult GroupByMatch()
+        {
+            var grouped_Students = _context.student
+                  .GroupBy(t => new { V = t.Name.StartsWith("A") })
+                  .Select(g => new
+                  {
+                      Name = g.Key.V,
+                      count = g.Count(), //number of students in the group
+                      names = string.Join(", ", g.Select(t => t.Name)) // students names
+                  });
+            return Ok(grouped_Students);
         }
     }
 }
